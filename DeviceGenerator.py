@@ -8,6 +8,7 @@ import subprocess
 import re
 import tkinter as tk
 from tkinter import messagebox
+from pathlib import Path
 
 
 def getrandommc():
@@ -37,12 +38,9 @@ def copy_to_clipboard(content):
 def generate_device():
     system = getsystem()
 
-    nativate_path = os.path.join(os.path.join(os.path.dirname(os.path.abspath(__file__)), "app"), "app")
-
-    jar_path = os.path.join(nativate_path, "unidbg.jar")
-
-    jni_path = os.path.join(os.path.join(nativate_path, "prebuilt"), system)
-
+    nativate_path = Path(__file__).resolve().parent / "Libs"
+    jni_path = nativate_path / "prebuilt" / system
+    
     os.chdir(nativate_path)
 
     headers = {
@@ -72,11 +70,9 @@ def generate_device():
     register = 'https://log-va.tiktokv.com/service/2/device_register/'
     with requests.session() as s:
         response = s.post(register, data=astr, headers=headers).json()
-    # enable_output_fields()
     openudid.set(openu_did)
     device_id.set(response['device_id'])
     iid.set(response['install_id'])
-    # disable_output_fields()
 
 
 # Initialize the main window
