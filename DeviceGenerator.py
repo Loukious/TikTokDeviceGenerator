@@ -50,7 +50,7 @@ def generate_device():
 
     gentime = str(int(time.time() * 1000))
     ud_id = str(random.randint(221480502743165, 821480502743165))
-    openu_did = "".join([random.choice("abcdefghijklmn1234567890")
+    openu_did = "".join([random.choice("0123456789abcdef")
                          for i in range(16)])
     mc = getrandommc()
 
